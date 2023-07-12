@@ -5,49 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HOME</title>
-    <style>
-        .wrapper{
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background-color: #FCFCFC;
-        }
-      .btn {
-        border-radius: 10px;
-        padding: 20px 40px;
-        font-size: 1.5em;
-        font-weight: bold;
-        color: white;
-        background-color: red;
-        transition: transform .3s ease-in-out;
-        box-shadow: 2px 2px 5 0;
-      }
-
-      .btn:hover{
-        transform: scale(1.1);
-      }
-
-      .btn-lista {
-        border-radius: 10px;
-        padding: 10px 20px;
-        background-color: blue;
-        color: white;
-        transition: transform .3s ease-in-out;
-        box-shadow: 2px 2px 0 0;
-      }
-
-         .btn-lista:hover{
-        transform: scale(1.1);
-      }
-    </style>
+    
+    <link href="style.css" rel="stylesheet">
   </head>
   <body>
-    <div class="wrapper">
-      <div class="btn">GIOCA</div>
-      <div class="btn-lista">Lista utenti</div>
+    <div id="home" class="wrapper">
+      <a id="gioca" class="btn" href="formaSquadre.html" target="_self">GIOCA</a>
+      <a id="listaGiocatori" class="btn" href="listaGiocatori.html" target="_self">Lista utenti</a>
     </div>
   </body>
 </html>
