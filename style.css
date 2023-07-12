@@ -4,6 +4,11 @@ body {
     position: relative;
   }
 
+  *{
+    margin: 0;
+    padding: 0;
+  }
+
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -13,9 +18,19 @@ body {
     height: 100vh;
     width: 100vw;
     background-position: 50%;
+    background-image: url("immagini/sfondoHome.png");
+    object-fit: contain;
+    background-repeat: no-repeat;
   }
 
-  #home{
+  .wrapper2{
+    display: flex;
+    gap:10px;
+    align-items: center;
+    justify-content: space-around;
+    height: 100vh;
+    width: 100vw;
+    background-position: 50%;
     background-image: url("immagini/sfondoHome.png");
     object-fit: contain;
     background-repeat: no-repeat;
@@ -66,4 +81,77 @@ body {
 
   hr{
     width: 80%;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url("immagini/sfondoHome.png");
+    object-fit: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    gap: 10px;
+  }
+
+  form fieldset {
+    color: white;
+    border: solid 3px white;
+  }
+
+  form fieldset legend {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  form fieldset input {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: solid 2px gray;
+  }
+
+  .squadra{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid white;
+    border-radius: 5px;
+  }
+
+  .squadra .intestazioneSquadra{
+    display: flex;
+    gap: 5px;
+    color: white;
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  #intestazioneSquadra1{
+    background: radial-gradient(circle, rgba(45,32,214,1) 24%, rgba(38,58,218,1) 87%);
+  }
+
+  #intestazioneSquadra2{
+    background: radial-gradient(circle, rgba(226,21,48,1) 51%, rgba(214,32,32,1) 95%);
+  }
+
+  
+
+  .squadra .punteggioSquadra{
+    background-color: white;
+    padding: 10px 20px;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+
+  #punteggioBriscolaSquadra1{
+    color: rgba(38,58,218,1);
+  }
+
+  #punteggioBriscolaSquadra2{
+    color: rgba(214,32,32,1);
   }

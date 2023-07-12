@@ -7,11 +7,45 @@
     <title>HOME</title>
     
     <link href="style.css" rel="stylesheet">
+    <script src="script.js" defer></script>
   </head>
   <body>
     <div id="home" class="wrapper">
-      <a id="gioca" class="btn" href="formaSquadre.html" target="_self">GIOCA</a>
-      <a id="listaGiocatori" class="btn" href="listaGiocatori.html" target="_self">Lista utenti</a>
+      <button id="gioca" class="btn" href="" target="_self">GIOCA</button>
+      <button id="listaGiocatori" class="btn" href="" target="_self">Lista utenti</button>
     </div>
+    <form id="formFormaSquadre" action="" target="_self" onsubmit="return formaSquadre()" style="display: none;">
+      <fieldset>
+        <legend>Squadra 1</legend>
+        <input
+          type="text"
+          id="nomeGiocatore1"
+          name="nomeGiocatore1"
+          placeholder="Giocatore1"
+        />
+        <input
+          type="text"
+          id="nomeGiocatore2"
+          name="nomeGiocatore2"
+          placeholder="Giocatore2"
+        />
+      </fieldset>
+      <fieldset>
+        <legend>Squadra 2</legend>
+        <input
+          type="text"
+          id="nomeGiocatore3"
+          name="nomeGiocatore3"
+          placeholder="Giocatore1"
+        />
+        <input
+          type="text"
+          id="nomeGiocatore4"
+          name="nomeGiocatore4"
+          placeholder="Giocatore2"
+        />
+      </fieldset>
+      <input type="submit" value="GIOCA" class="btn" />
+    </form>
   </body>
 </html>
