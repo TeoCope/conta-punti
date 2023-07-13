@@ -7,14 +7,19 @@
     <title>HOME</title>
     
     <link href="style.css" rel="stylesheet">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
     <script src="script.js" defer></script>
   </head>
   <body>
     <div id="home" class="wrapper">
       <button id="gioca" class="btn" href="" target="_self">GIOCA</button>
-      <button id="listaGiocatori" class="btn" href="" target="_self">Lista utenti</button>
     </div>
-    <form id="formFormaSquadre" action="" target="_self" onsubmit="return formaSquadre()" style="display: none;">
+    
+    <div id="formFormaSquadre" style="display: none;">
       <fieldset>
         <legend>Squadra 1</legend>
         <input
@@ -45,7 +50,36 @@
           placeholder="Giocatore2"
         />
       </fieldset>
-      <input type="submit" value="GIOCA" class="btn" />
-    </form>
+      <button id="iniziaPartita" class="btn">GIOCA</button>
+    </div>
+
+    <div id="briscola" class="wrapper" style="display: none;">
+      <h3 id="nomeGioco">BRISCOLA</h3>
+      <div id="punteggiSquadre">
+      <div id="squadra1" class="squadra">
+        <div id="intestazioneSquadra1" class="intestazioneSquadra">
+          <p id="nomeSquadra1">Squadra 1</p>
+          <p id="punteggioSquadra1">0</p>
+        </div>
+        <div id="vittorieSquadra1" class="punteggioSquadra">
+            <i id="decrementaSquadra1" class="fa-solid fa-minus decrementa"></i>
+            <p id="puntiSquadra1" class="segnaPunti">0</p>
+            <i id="incrementaSquadra1" class="fa-solid fa-plus incrementa"></i>
+        </div>
+      </div>
+      <div id="squadra2" class="squadra">
+        <div id="intestazioneSquadra2" class="intestazioneSquadra">
+          <p id="nomeSquadra2">Squadra 2</p>
+          <p id="punteggioSquadra2">0</p>
+        </div>
+        <div id="vittorieSquadra2" class="punteggioSquadra">
+            <i id="decrementaSquadra2" class="fa-solid fa-minus decrementa"></i>
+            <p id="puntiSquadra2" class="segnaPunti">0</p>
+            <i id="incrementaSquadra2" class="fa-solid fa-plus incrementa"></i> 
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
   </body>
 </html>
