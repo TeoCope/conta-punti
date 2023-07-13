@@ -58,6 +58,7 @@ body {
   #formFormaSquadre fieldset {
     color: white;
     border: solid 3px white;
+    padding: 10px 5px;
   }
 
   #formFormaSquadre fieldset legend {
