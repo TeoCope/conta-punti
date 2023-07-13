@@ -127,7 +127,7 @@ bottoneIncrementaSquadra2.addEventListener("click", () => {
     return
   }
 
-  if (puntiSquadra2 == 3 && confirm("Ha vinto " + nomeSquadra2)) {
+  if (puntiSquadra2 == 2 && confirm("Ha vinto " + nomeSquadra2)) {
     assegnaVittoriaSquadra2();
     controllaVincitore()
     azzeraPunti();
