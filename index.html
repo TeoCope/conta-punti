@@ -17,6 +17,13 @@
   <body>
     <div id="home" class="wrapper">
       <button id="gioca" class="btn" href="" target="_self">GIOCA</button>
+      <select name="modalitaDiGioco" id="modalitaDiGioco">
+        <option value="marcelli">Marcelli</option>
+        <option value="castello">Castello</option>
+        <option value="briscola">Briscola</option>
+        <option value="tresette">Tresette</option>
+        <option value="burraco">Burraco</option>
+      </select>
     </div>
     
     <div id="formFormaSquadre" style="display: none;">
@@ -26,13 +33,13 @@
           type="text"
           id="nomeGiocatore1"
           name="nomeGiocatore1"
-          placeholder="Giocatore1"
+          value="gioc1"
         />
         <input
           type="text"
           id="nomeGiocatore2"
           name="nomeGiocatore2"
-          placeholder="Giocatore2"
+          value="gioc2"
         />
       </fieldset>
       <fieldset>
@@ -41,44 +48,49 @@
           type="text"
           id="nomeGiocatore3"
           name="nomeGiocatore3"
-          placeholder="Giocatore1"
+          value="gioc3"
         />
         <input
           type="text"
           id="nomeGiocatore4"
           name="nomeGiocatore4"
-          placeholder="Giocatore2"
+          value="gioc4"
         />
       </fieldset>
       <button id="iniziaPartita" class="btn">GIOCA</button>
     </div>
 
-    <div id="briscola" class="wrapper" style="display: none;">
-      <h3 id="nomeGioco">BRISCOLA</h3>
+    <div id="partita" class="wrapper" style="display: none;">
+      <h3 id="nomeGioco"></h3>
       <div id="punteggiSquadre">
-      <div id="squadra1" class="squadra">
-        <div id="intestazioneSquadra1" class="intestazioneSquadra">
-          <p id="nomeSquadra1">Squadra 1</p>
-          <p id="punteggioSquadra1">0</p>
+        <div id="squadra1" class="squadra">
+          <div id="intestazioneSquadra1" class="intestazioneSquadra">
+            <p id="nomeSquadra1">Squadra 1</p>
+            <p id="vittorieSquadra1">0</p>
+          </div>
+          <div id="risultatiSquadra1" class="risultati">
+            <hr id="barraSquadra1">
+            <p id="punteggioTotSquadra1"></p>
+          </div>
+          <div id="punteggioSquadra1" class="punteggioSquadra">
+              <input type="number" id="puntiSquadra1" name="puntiSquadra1" class="segnaPunti" value="0">
+          </div>
         </div>
-        <div id="vittorieSquadra1" class="punteggioSquadra">
-            <i id="decrementaSquadra1" class="fa-solid fa-minus decrementa"></i>
-            <p id="puntiSquadra1" class="segnaPunti">0</p>
-            <i id="incrementaSquadra1" class="fa-solid fa-plus incrementa"></i>
-        </div>
-      </div>
-      <div id="squadra2" class="squadra">
-        <div id="intestazioneSquadra2" class="intestazioneSquadra">
-          <p id="nomeSquadra2">Squadra 2</p>
-          <p id="punteggioSquadra2">0</p>
-        </div>
-        <div id="vittorieSquadra2" class="punteggioSquadra">
-            <i id="decrementaSquadra2" class="fa-solid fa-minus decrementa"></i>
-            <p id="puntiSquadra2" class="segnaPunti">0</p>
-            <i id="incrementaSquadra2" class="fa-solid fa-plus incrementa"></i> 
+        <div id="squadra2" class="squadra">
+          <div id="intestazioneSquadra2" class="intestazioneSquadra">
+            <p id="nomeSquadra2">Squadra 2</p>
+            <p id="vittorieSquadra2">0</p>
+          </div>
+          <div id="risultatiSquadra2" class="risultati">
+            <hr id="barraSquadra2">
+            <p id="punteggioTotSquadra2"></p>
+          </div>
+          <div id="punteggioSquadra2" class="punteggioSquadra">
+            <input type="number" id="puntiSquadra2" name="puntiSquadra2" class="segnaPunti" value="0">
           </div>
         </div>
       </div>
+      <button id="aggiungiRisultato" class="btn">AGGIUNGI</button>
     </div>
     </div>
   </body>

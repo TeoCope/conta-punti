@@ -29,8 +29,6 @@ body {
     gap:10px;
     align-items: center;
     justify-content: space-around;
-    /* height: 100vh;
-    width: 100vw; */
     background-position: 50%;
   }
 
@@ -44,6 +42,13 @@ body {
   #gioca {
     font-size: 1.5em;
     font-weight: bold;
+  }
+
+  #home select{
+    padding: 5px 10px;
+    font-size: 1.2em;
+    background: #f1c310;
+    border-radius: 5px;
   }
 
   #formFormaSquadre {
@@ -122,19 +127,6 @@ body {
     padding: 0 10px;
   }
 
-  .incrementa{
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border: 2px solid gray;
-  }
-
-  .decrementa{
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border: 2px solid gray;
-
-  }
-
   #puntiSquadra1{
     color: rgba(38,58,218,1);
   }
@@ -151,12 +143,35 @@ body {
     width: 70px;
     height: 70px;
     line-height: 70px;
+    border-radius: 5px;
   }
 
   #nomeGioco{
-    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: white;
+    color: #73DF81;
     font-size: 2em;
     font-weight: bold;
   }
 
+  #aggiungiRisultato{
+    padding: 10px 20px;
+    font-size: 1.2em;
+  }
+
+  .risultati{
+    background: white;
+    padding: 10px 20px;
+    font-size: 1.2em;
+  }
+
+  #risultatiSquadra1{
+    color: rgba(38,58,218,1);
+  }
+
+  #risultatiSquadra2{
+    color: rgba(214,32,32,1);
+  }
+ 
  

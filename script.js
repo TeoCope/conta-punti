@@ -1,19 +1,286 @@
 const home = document.getElementById("home");
 const inserisciGiocatori = document.getElementById("formFormaSquadre");
-const gioco = document.getElementById("briscola");
+const partita = document.getElementById("partita");
 
 var bottoneGioca = document.getElementById("gioca");
 var bottoneIniziaPartita = document.getElementById("iniziaPartita");
+var bottoneAggiungi = document.getElementById("aggiungiRisultato");
+
+var modalitaGiocoDaVerificare = document.getElementById("modalitaDiGioco");
+var indiceSelezionato;
+var modalitaSelezionata;
+var modalitaGioco;
+
+var numeroPartitaCorrente = 2;
+
+var nomiGiocatoriSquadra1 = new Array();
+var nomiGiocatoriSquadra2 = new Array();
+var Squadra1;
+var Squadra2;
+var puntiSquadre = [0, 0];
+var vittorieBriscola = [0,0];
+var vittorieSquadre = [0, 0];
+var memoriaPuntiSquadre = [0, 0];
+
+const nomeGioco = document.getElementById("nomeGioco");
 
 bottoneGioca.addEventListener("click", function () {
+  indiceSelezionato = modalitaGiocoDaVerificare.selectedIndex;
+  modalitaSelezionata = modalitaGiocoDaVerificare.options[indiceSelezionato];
+  modalitaGioco = modalitaSelezionata.value;
   displayNone(home);
   displayFlex(inserisciGiocatori);
 });
 
 bottoneIniziaPartita.addEventListener("click", () => {
+  catturaNomi();
+  Squadra1 = new Squadra(0, nomiGiocatoriSquadra1);
+  Squadra2 = new Squadra(0, nomiGiocatoriSquadra2);
+  scriviNomeSquadre();
   displayNone(inserisciGiocatori);
-  displayFlex(gioco);
+  switch (modalitaGioco) {
+    case "marcelli":
+    case "castello": {
+      nomeGioco.innerText = "BRISCOLA";
+      document.getElementById("punteggioTotSquadra1").style.display = "block";
+      document.getElementById("punteggioTotSquadra2").style.display = "block";
+      break;
+    }
+    case "briscola": {
+      nomeGioco.innerText = "BRISCOLA";
+      document.getElementById("punteggioTotSquadra1").style.display = "none";
+      document.getElementById("punteggioTotSquadra2").style.display = "none";
+      break;
+    }
+    case "tresette": {
+      document.getElementById("punteggioTotSquadra1").style.display = "block";
+      document.getElementById("punteggioTotSquadra2").style.display = "block";
+      document.getElementById("vittorieSquadra1").style.display = "none";
+      document.getElementById("vittorieSquadra2").style.display = "none";
+      nomeGioco.innerText = "TRESETTE";
+      break;
+    }
+    case "burraco": {
+      document.getElementById("punteggioTotSquadra1").style.display = "block";
+      document.getElementById("punteggioTotSquadra2").style.display = "block";
+      document.getElementById("vittorieSquadra1").style.display = "none";
+      document.getElementById("vittorieSquadra2").style.display = "none";
+      nomeGioco.innerText = "BURRACO";
+    }
+  }
+  displayFlex(partita);
 });
+
+function catturaNomi() {
+  for (let i = 1; i < 3; i++) {
+    nomiGiocatoriSquadra1[i - 1] = document.getElementById(
+      "nomeGiocatore" + i
+    ).value;
+  }
+  for (let i = 1, j = 3; i < 3; i++, j++) {
+    nomiGiocatoriSquadra2[i - 1] = document.getElementById(
+      "nomeGiocatore" + j
+    ).value;
+  }
+}
+
+function scriviNomeSquadre() {
+  document.getElementById("nomeSquadra1").innerText = Squadra1.nome;
+  document.getElementById("nomeSquadra2").innerText = Squadra2.nome;
+}
+
+var puntiSquadra1 = document.getElementById("puntiSquadra1");
+var puntiSquadra2 = document.getElementById("puntiSquadra2");
+
+bottoneAggiungi.addEventListener("click", () => {
+  var punteggioSquadra1 = Number(puntiSquadra1.value);
+  var punteggioSquadra2 = Number(puntiSquadra2.value);
+  switch(modalitaGioco){
+    case "briscola": {
+      if(punteggioSquadra1 + punteggioSquadra2 != 120) {
+        alert("Punteggio inserito Errato");
+        return;
+      }
+
+      if(punteggioSquadra1 == punteggioSquadra2) {
+        assegnaPunti();
+        azzeraPunti();
+      } else if(punteggioSquadra1 > punteggioSquadra2) {
+        assegnaVittoriaSquadra1();
+        assegnaPunti();
+        azzeraPunti();
+      } else {
+        assegnaVittoriaSquadra2();
+        assegnaPunti();
+        azzeraPunti();
+      }
+
+      setTimeout(vittoriaBriscola,500);
+    }; break;
+    case "tresette": {
+      if(punteggioSquadra1 > 30 || punteggioSquadra2 > 30){
+        alert("Punteggio inserito Errato");
+        return;
+      }
+
+      salvaPunti();
+      assegnaPunti();
+      azzeraPunti();
+
+      setTimeout(vittoriaTresette, 500)
+    }; break;
+    case "burraco": {
+      if(punteggioSquadra1 % 5 == 0 && punteggioSquadra2 % 5 == 0){
+        salvaPunti();
+        assegnaPunti();
+        azzeraPunti();
+      } else {
+        alert("Punteggio inserito Errato")
+      }
+
+      setTimeout(vittoriaBurraco,500);
+    };break;
+    case "marcelli": {
+        if(numeroPartitaCorrente % 2 == 0){
+          if(punteggioSquadra1 + punteggioSquadra2 != 120) {
+            alert("Punteggio inserito Errato");
+            return;
+          } else if(punteggioSquadra1 == punteggioSquadra2) {
+            assegnaPunti();
+            azzeraPunti();
+          } else if(punteggioSquadra1 > punteggioSquadra2) {
+            vittorieBriscola[0]++;
+            assegnaPunti();
+            assegnaVittoriaBriscola();
+            azzeraPunti();
+          } else {
+            vittorieBriscola[1]++;
+            assegnaPunti();
+            assegnaVittoriaBriscola();
+            azzeraPunti();
+          }
+          
+          setTimeout(vittoriaBriscolaBabbo,500);
+        } else {
+          if(punteggioSquadra1 > 30 || punteggioSquadra2 > 30){
+            alert("Punteggio inserito Errato");
+            return;
+          } else{
+          salvaPunti();
+          assegnaPunti();
+          azzeraPunti();
+          }
+          setTimeout(vittoriaTresetteBabbo, 500);
+          
+        }
+      setTimeout(vittoriaMarcelli, 500);
+    }; break;
+    case "castello": {
+        if(numeroPartitaCorrente % 2 == 0){
+          if(punteggioSquadra1 + punteggioSquadra2 != 120) {
+            alert("Punteggio inserito Errato");
+            return;
+          } else if(punteggioSquadra1 == punteggioSquadra2) {
+            assegnaPunti();
+            azzeraPunti();
+          } else if(punteggioSquadra1 > punteggioSquadra2) {
+            vittorieBriscola[0]++;
+            assegnaPunti();
+            assegnaVittoriaBriscola();
+            azzeraPunti();
+          } else {
+            vittorieBriscola[1]++;
+            assegnaPunti();
+            assegnaVittoriaBriscola();
+            azzeraPunti();
+          }
+
+          setTimeout(vittoriaBriscolaBabbo,500);
+          
+        } else {
+          if(punteggioSquadra1 > 30 || punteggioSquadra2 > 30){
+            alert("Punteggio inserito Errato");
+            return;
+          } else{
+          salvaPunti();
+          assegnaPunti();
+          azzeraPunti();
+          }
+          setTimeout(vittoriaTresetteBabbo, 500); 
+        }
+        setTimeout(vittoriaCastello,500);
+      };break;
+      
+    };
+});
+
+function azzeraPunti() {
+  for (let i = 0; i < 2; i++) {
+    document.getElementById("puntiSquadra"+(i+1)).value = 0;
+  }
+}
+
+function salvaPunti() {
+  for (let i = 0; i < 2; i++) {
+    memoriaPuntiSquadre[i] += Number(document.getElementById("puntiSquadra"+(i+1)).value);
+  }
+}
+
+function assegnaPunti() {
+  for (let i = 0; i < 2; i++) {
+    let nuovaRiga = document.createElement("p");
+    nuovaRiga.innerText = "- " + document.getElementById("puntiSquadra"+(i+1)).value;
+    let barra = document.getElementById("barraSquadra" + (i + 1));
+    document.getElementById("risultatiSquadra" + (i + 1)).insertBefore(nuovaRiga, barra);
+    document.getElementById("punteggioTotSquadra" + (i + 1)).innerText = "TOT: " + memoriaPuntiSquadre[i];
+  }
+}
+
+function assegnaVittoriaSquadra1() {
+  document.getElementById("vittorieSquadra1").innerText = ++vittorieSquadre[0];
+}
+
+function assegnaVittoriaSquadra2() {
+  document.getElementById("vittorieSquadra2").innerText = ++vittorieSquadre[1];
+}
+
+function assegnaVittoriaBriscola() {
+  document.getElementById("punteggioTotSquadra1").innerText ="Vittorie: " + vittorieBriscola[0];
+  document.getElementById("punteggioTotSquadra2").innerText ="Vittorie: " + vittorieBriscola[1];
+}
+
+class Squadra {
+  constructor(vittorie, giocatori) {
+    this.vittorie = vittorie;
+    this.giocatori = giocatori;
+    this.nome =
+      this.giocatori[0].substr(0, 5) + " - " + this.giocatori[1].substr(0, 5);
+  }
+
+  get nome() {
+    return this._nome;
+  }
+
+  set nome(nome) {
+    this._nome = nome;
+  }
+
+  get giocatori() {
+    return this._giocatori;
+  }
+
+  set giocatori(giocatori) {
+    this._giocatori = giocatori;
+  }
+
+  get vittorie() {
+    return this._vittorie;
+  }
+
+  set vittorie(vittorie) {
+    this._vittorie = vittorie;
+  }
+}
 
 function displayNone(elemento) {
   elemento.style.display = "none";
@@ -23,181 +290,106 @@ function displayFlex(elemento) {
   elemento.style.display = "flex";
 }
 
-var nomiGiocatori = new Array();
-
-bottoneIniziaPartita.addEventListener("click", () => {
-  catturaNomi();
-  formaSquadre();
-  displayNone(inserisciGiocatori);
-  displayFlex(briscola);
-});
-
-function catturaNomi() {
-  for (let i = 1; i < 5; i++) {
-    nomiGiocatori[i - 1] = document.getElementById("nomeGiocatore" + i).value;
+function cancellaPagina(){
+  let risultatiSquadra1 = document.querySelectorAll("#risultatiSquadra1 p");
+  let risultatiSquadra2 = document.querySelectorAll("#risultatiSquadra2 p");
+  risultatiSquadra1[risultatiSquadra1.length-1].innerText = "";
+  risultatiSquadra2[risultatiSquadra2.length-1].innerText = "";
+  for (let i = 0; i < risultatiSquadra1.length - 1; i++ ){
+    risultatiSquadra1[i].remove();
+    risultatiSquadra2[i].remove();
   }
 }
 
-var nomeSquadra1;
-var nomeSquadra2;
-
-function formaSquadre() {
-  creaNomiSquadre();
-
-  document.getElementById("nomeSquadra1").innerText = nomeSquadra1;
-  document.getElementById("nomeSquadra2").innerText = nomeSquadra2;
+function vittoriaBriscola(){
+  if(vittorieSquadre[0] == 3){
+    alert("Ha vinto " + Squadra1.nome);
+    location.reload();
+  } else if(vittorieSquadre[1] == 3) {
+    alert("Ha vinto " + Squadra2.nome);
+    location.reload();
+  }
 }
 
-function creaNomiSquadre() {
-  for (let i = 0; i < 5; i++) {
-    if (nomiGiocatori[i] == "") {
-      nomiGiocatori[i] = "gioc" + (i + 1);
-    }
-  }
-
-  nomeSquadra1 =
-    nomiGiocatori[0].substr(0, 5) + " - " + nomiGiocatori[1].substr(0, 5);
-  nomeSquadra2 =
-    nomiGiocatori[2].substr(0, 5) + " - " + nomiGiocatori[3].substr(0, 5);
-}
-
-function combinaNomi() {}
-
-var punteggioVittorieSquadra1 = document.getElementById("punteggioSquadra1");
-var punteggioVittorieSquadra2 = document.getElementById("punteggioSquadra2");
-
-var bottoneIncrementaSquadra1 = document.getElementById("incrementaSquadra1");
-var bottoneDecrementaSquadra1 = document.getElementById("decrementaSquadra1");
-
-var bottoneIncrementaSquadra2 = document.getElementById("incrementaSquadra2");
-var bottoneDecrementaSquadra2 = document.getElementById("decrementaSquadra2");
-
-var puntiSquadra1 = 0;
-var puntiSquadra2 = 0;
-
-var vittorieSquadra1 = 0;
-var vittorieSquadra2 = 0;
-
-var numeroPartitaCorrente = 1;
-
-bottoneIncrementaSquadra1.addEventListener("click", () => {
-  if (!isBriscola()) {
-    if (puntiSquadra1 < 2) {
-      puntiSquadra1++;
-      assegnaPuntiSquadra1();
-      return;
-    }
-
-    if (puntiSquadra1 == 2 && confirm("Ha vinto " + nomeSquadra1)) {
-        assegnaVittoriaSquadra1();
-        controllaVincitore()
-        azzeraPunti();
-        assegnaPuntiSquadra1();
-        assegnaPuntiSquadra2();
-    }
-  } else {
-    if(puntiSquadra1 < 40){
-        puntiSquadra1++;
-        assegnaPuntiSquadra1();
-        return;
-    }
-
-    if(puntiSquadra1 == 40 && confirm("Ha vinto " + nomeSquadra1)) {
-        assegnaVittoriaSquadra1();
-        controllaVincitore()
-        azzeraPunti();
-        assegnaPuntiSquadra1();
-        assegnaPuntiSquadra2();
-    }
-  }
-});
-
-bottoneDecrementaSquadra1.addEventListener("click", () => {
-  if (puntiSquadra1 >= 1) {
-    puntiSquadra1--;
-    assegnaPuntiSquadra1();
-  }
-});
-
-bottoneIncrementaSquadra2.addEventListener("click", () => {
-    if(!isBriscola()){
-  if (puntiSquadra2 < 2) {
-    puntiSquadra2++;
-    assegnaPuntiSquadra2();
-    return
-  }
-
-  if (puntiSquadra2 == 2 && confirm("Ha vinto " + nomeSquadra2)) {
+function vittoriaBriscolaBabbo(){
+  if(vittorieBriscola[0] == 3 || vittorieBriscola[1] == 3){
+  if(vittorieBriscola[0] == 3){
+    alert("Ha vinto " + Squadra1.nome);
+    assegnaVittoriaSquadra1();
+  } else if(vittorieBriscola[1] == 3) {
+    alert("Ha vinto " + Squadra2.nome);
     assegnaVittoriaSquadra2();
-    controllaVincitore()
-    azzeraPunti();
-    assegnaPuntiSquadra1();
-    assegnaPuntiSquadra2();
   }
-} else {
-    if(puntiSquadra2 < 40){
-        puntiSquadra2++;
-        assegnaPuntiSquadra2();
-        return;
-    }
-
-    if(puntiSquadra2 == 40 && confirm("Ha vinto " + nomeSquadra2)) {
-        assegnaVittoriaSquadra2();
-        controllaVincitore()
-        azzeraPunti();
-        assegnaPuntiSquadra1();
-        assegnaPuntiSquadra2();
-    }
-  }
-});
-
-bottoneDecrementaSquadra2.addEventListener("click", () => {
-  if (puntiSquadra2 >= 1) {
-    puntiSquadra2--;
-    assegnaPuntiSquadra2();
-  }
-});
-
-function isBriscola() {
-  return numeroPartitaCorrente % 2 == 0;
+  vittorieBriscola[0] = 0;
+  vittorieBriscola[1] = 0;
+  cancellaPagina();
+  nomeGioco.innerText = "TRESETTE";
+  numeroPartitaCorrente++;
+  azzeraPunti();
+}
 }
 
-function assegnaPuntiSquadra1() {
-  document.getElementById("puntiSquadra1").innerText = puntiSquadra1;
-}
-
-function assegnaPuntiSquadra2() {
-  document.getElementById("puntiSquadra2").innerText = puntiSquadra2;
-}
-
-function assegnaVittoriaSquadra1() {
-    document.getElementById("punteggioSquadra1").innerText = ++vittorieSquadra1;
-}
-
-function assegnaVittoriaSquadra2() {
-    document.getElementById("punteggioSquadra2").innerText = ++vittorieSquadra2;
-}
-
-function azzeraPunti() {
-    puntiSquadra1 = 0;
-    puntiSquadra2 = 0;
-}
-
-const nomeGioco = document.getElementById("nomeGioco");
-function controllaVincitore() {
-    if(vittorieSquadra1 < 2 && vittorieSquadra2 < 2){
-        numeroPartitaCorrente++;
-        if(isBriscola()){
-            nomeGioco.innerText = "TRESETTE";
-        }
-        else{
-            nomeGioco.innerText ="BRISCOLA";
-        }
-    } else if( vittorieSquadra1 == 2) {
-        alert("Ha vinto " + nomeSquadra1);
-        location.reload();
+function vittoriaTresette(){
+  if(memoriaPuntiSquadre[0] >= 41 || memoriaPuntiSquadre[1] >= 41){
+    if(memoriaPuntiSquadre[0] > memoriaPuntiSquadre[1]){
+      alert("Ha vinto " + Squadra1.nome);
+      location.reload();
     } else {
-        alert("Ha vinto " + nomeSquadra2);
-        location.reload();
+      alert("Ha vinto " + Squadra2.nome);
+      location.reload();
     }
+  }
 }
+
+function vittoriaTresetteBabbo(){
+  if(memoriaPuntiSquadre[0] >= 41 || memoriaPuntiSquadre[1] >= 41){
+    if(memoriaPuntiSquadre[0] > memoriaPuntiSquadre[1]){
+      numeroPartitaCorrente++;
+      alert("Ha vinto " + Squadra1.nome);
+      assegnaVittoriaSquadra1();
+    } else if(memoriaPuntiSquadre[0] < memoriaPuntiSquadre[1]) {
+      numeroPartitaCorrente++;
+      alert("Ha vinto " + Squadra2.nome);
+      assegnaVittoriaSquadra2();
+    } else {return;}
+    memoriaPuntiSquadre[0] = 0;
+    memoriaPuntiSquadre[1] = 0;
+    cancellaPagina();
+    nomeGioco.innerText = "BRISCOLA";
+    azzeraPunti();
+  }
+}
+
+function vittoriaBurraco(){
+  if(memoriaPuntiSquadre[0] >= 2005 || memoriaPuntiSquadre[1] >= 2005){
+    if(memoriaPuntiSquadre[0] > memoriaPuntiSquadre[1]){
+      alert("Ha vinto " + Squadra1.nome);
+      location.reload();
+    } else {
+      alert("Ha vinto " + Squadra2.nome);
+      location.reload();
+    }
+  }
+}
+
+function vittoriaMarcelli(){
+  if(vittorieSquadre[0] == 2){
+    alert("Ha vinto " + Squadra1.nome);
+    location.reload();
+  } else if(vittorieSquadre[1] == 2){
+    alert("Ha vinto " + Squadra2.nome);
+    location.reload();
+  }
+}
+
+function vittoriaCastello(){
+  if(vittorieSquadre[0] == 3){
+    alert("Ha vinto " + Squadra1.nome);
+    location.reload();
+  } else if(vittorieSquadre[1] == 3){
+    alert("Ha vinto " + Squadra2.nome);
+    location.reload();
+  }
+}
+
+
