@@ -1,177 +1,192 @@
 body {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    background-position: 50%;
-    background-image: url("immagini/sfondoHome.png");
-    object-fit: contain;
-    background-repeat: no-repeat;
-  }
+  margin: 0;
+  padding: 0;
+  position: relative;
+  background-position: 50%;
+  background-image: url("immagini/sfondoHome.png");
+  object-fit: contain;
+  background-repeat: no-repeat;
+}
 
-  *{
-    margin: 0;
-    padding: 0;
-  }
+* {
+  margin: 0;
+  padding: 0;
+}
 
-  .wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100vw;
-    
-  }
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
 
-  .wrapper #punteggiSquadre{
-    display: flex;
-    gap:10px;
-    align-items: center;
-    justify-content: space-around;
-    background-position: 50%;
-  }
+.wrapper #punteggiSquadre {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-around;
+  background-position: 50%;
+}
 
-  .btn{
-    border-radius: 10px;
-    padding: 20px 40px;
-    color:white;
-    background-color: #e21530;
-  }
+.btn {
+  border-radius: 10px;
+  padding: 20px 40px;
+  color: white;
+  background-color: #e21530;
+}
 
-  #gioca {
-    font-size: 1.5em;
-    font-weight: bold;
-  }
+#gioca {
+  font-size: 1.5em;
+  font-weight: bold;
+}
 
-  #home select{
-    padding: 5px 10px;
-    font-size: 1.2em;
-    background: #f1c310;
-    border-radius: 5px;
-  }
+#home select {
+  padding: 5px 10px;
+  font-size: 1.2em;
+  background: #f1c310;
+  border-radius: 5px;
+}
 
-  #formFormaSquadre {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    gap: 10px;
-  }
+#formFormaSquadre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 10px;
+}
 
-  #formFormaSquadre fieldset {
-    color: white;
-    border: solid 3px white;
-    padding: 10px 5px;
-  }
+#formFormaSquadre fieldset {
+  color: white;
+  border: solid 3px white;
+  padding: 10px 5px;
+}
 
-  #formFormaSquadre fieldset legend {
-    font-size: 1.2em;
-    font-weight: bold;
-  }
+#formFormaSquadre fieldset legend {
+  font-size: 1.2em;
+  font-weight: bold;
+}
 
-  #formFormaSquadre fieldset input {
-    padding: 5px 10px;
-    border-radius: 5px;
-    border: solid 2px gray;
-  }
+#formFormaSquadre fieldset input {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: solid 2px gray;
+}
 
-  .squadra{
-    display: flex;
-    flex-direction: column;
-    border: 2px solid white;
-    border-radius: 5px;
-    width: 175px;
-  }
+.squadra {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid white;
+  border-radius: 5px;
+  width: 175px;
+}
 
-  .squadra .intestazioneSquadra{
-    display: flex;
-    gap: 5px;
-    justify-content: space-around;
-    color: white;
-    font-size: 1.3em;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-  }
+.squadra .intestazioneSquadra {
+  display: flex;
+  gap: 5px;
+  justify-content: space-around;
+  color: white;
+  font-size: 1.3em;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
 
-  #intestazioneSquadra1{
-    background: radial-gradient(circle, rgba(45,32,214,1) 24%, rgba(38,58,218,1) 87%);
-  }
+#intestazioneSquadra1 {
+  background: radial-gradient(
+    circle,
+    rgba(45, 32, 214, 1) 24%,
+    rgba(38, 58, 218, 1) 87%
+  );
+}
 
-  #intestazioneSquadra2{
-    background: radial-gradient(circle, rgba(226,21,48,1) 51%, rgba(214,32,32,1) 95%);
-  }
+#intestazioneSquadra2 {
+  background: radial-gradient(
+    circle,
+    rgba(226, 21, 48, 1) 51%,
+    rgba(214, 32, 32, 1) 95%
+  );
+}
 
-  .squadra .punteggioSquadra{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    padding: 10px 20px;
-    color: white;
-    font-size: 1.1em;
-    font-weight: 600;
-    text-align: center;
-  }
+.squadra .punteggioSquadra {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 10px 20px;
+  color: white;
+  font-size: 1.1em;
+  font-weight: 600;
+  text-align: center;
+}
 
-  .punteggioSquadra i{
-    color: black;
-    cursor: pointer;
-    background-color: #F5F5F5;
-    height: 70px;
-    line-height: 70px;
-    padding: 0 10px;
-  }
+.punteggioSquadra i {
+  color: black;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  height: 70px;
+  line-height: 70px;
+  padding: 0 10px;
+}
 
-  #puntiSquadra1{
-    color: rgba(38,58,218,1);
-  }
+#puntiSquadra1 {
+  color: rgba(38, 58, 218, 1);
+}
 
-  #puntiSquadra2{
-    color: rgba(214,32,32,1);
-  }
+#puntiSquadra2 {
+  color: rgba(214, 32, 32, 1);
+}
 
-  .segnaPunti{
-    text-align: center;
-    font-size: 1.3em;
-    border-top: 2px solid gray;
-    border-bottom: 2px solid gray;
-    width: 70px;
-    height: 70px;
-    line-height: 70px;
-    border-radius: 5px;
-  }
+.segnaPunti {
+  text-align: center;
+  font-size: 1.3em;
+  border-top: 2px solid gray;
+  border-bottom: 2px solid gray;
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  border-radius: 5px;
+}
 
-  #nomeGioco{
-    padding: 10px 20px;
-    border-radius: 5px;
-    background: white;
-    color: #73DF81;
-    font-size: 2em;
-    font-weight: bold;
-  }
+#nomeGioco {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: white;
+  color: #73df81;
+  font-size: 2em;
+  font-weight: bold;
+}
 
-  #aggiungiRisultato{
-    padding: 10px 20px;
-    font-size: 1.2em;
-  }
+#aggiungiRisultato {
+  padding: 10px 20px;
+  font-size: 1.2em;
+}
 
-  .risultati{
-    background: white;
-    padding: 10px 20px;
-    font-size: 1.2em;
-  }
+.risultati {
+  background: white;
+  padding: 10px 20px;
+  font-size: 1.2em;
+}
 
-  #risultatiSquadra1{
-    color: rgba(38,58,218,1);
-  }
+#risultatiSquadra1 {
+  color: rgba(38, 58, 218, 1);
+}
 
-  #risultatiSquadra2{
-    color: rgba(214,32,32,1);
-  }
- 
- 
+#risultatiSquadra2 {
+  color: rgba(214, 32, 32, 1);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
