@@ -13,6 +13,39 @@ var modalitaGioco;
 
 var numeroPartitaCorrente = 2;
 
+class Squadra {
+  constructor(vittorie, giocatori) {
+    this.vittorie = vittorie;
+    this.giocatori = giocatori;
+    this.nome =
+      this.giocatori[0].substr(0, 5) + " - " + this.giocatori[1].substr(0, 5);
+  }
+
+  get nome() {
+    return this._nome;
+  }
+
+  set nome(nome) {
+    this._nome = nome;
+  }
+
+  get giocatori() {
+    return this._giocatori;
+  }
+
+  set giocatori(giocatori) {
+    this._giocatori = giocatori;
+  }
+
+  get vittorie() {
+    return this._vittorie;
+  }
+
+  set vittorie(vittorie) {
+    this._vittorie = vittorie;
+  }
+}
+
 var nomiGiocatoriSquadra1 = new Array();
 var nomiGiocatoriSquadra2 = new Array();
 var Squadra1;
@@ -21,6 +54,9 @@ var puntiSquadre = [0, 0];
 var vittorieBriscola = [0,0];
 var vittorieSquadre = [0, 0];
 var memoriaPuntiSquadre = [0, 0];
+
+var puntiSquadra1 = document.getElementById("puntiSquadra1");
+var puntiSquadra2 = document.getElementById("puntiSquadra2");
 
 const nomeGioco = document.getElementById("nomeGioco");
 
@@ -39,8 +75,8 @@ bottoneIniziaPartita.addEventListener("click", () => {
   scriviNomeSquadre();
   displayNone(inserisciGiocatori);
   switch (modalitaGioco) {
-    case "marcelli":
-    case "castello": {
+    case "meglioDiDue":
+    case "meglioDiTre": {
       nomeGioco.innerText = "BRISCOLA";
       document.getElementById("punteggioTotSquadra1").style.display = "block";
       document.getElementById("punteggioTotSquadra2").style.display = "block";
@@ -88,9 +124,6 @@ function scriviNomeSquadre() {
   document.getElementById("nomeSquadra1").innerText = Squadra1.nome;
   document.getElementById("nomeSquadra2").innerText = Squadra2.nome;
 }
-
-var puntiSquadra1 = document.getElementById("puntiSquadra1");
-var puntiSquadra2 = document.getElementById("puntiSquadra2");
 
 bottoneAggiungi.addEventListener("click", () => {
   var punteggioSquadra1 = Number(puntiSquadra1.value);
@@ -140,7 +173,7 @@ bottoneAggiungi.addEventListener("click", () => {
 
       setTimeout(vittoriaBurraco,500);
     };break;
-    case "marcelli": {
+    case "meglioDiDue": {
         if(numeroPartitaCorrente % 2 == 0){
           if(punteggioSquadra1 + punteggioSquadra2 != 120) {
             alert("Punteggio inserito Errato");
@@ -173,9 +206,9 @@ bottoneAggiungi.addEventListener("click", () => {
           setTimeout(vittoriaTresetteBabbo, 500);
           
         }
-      setTimeout(vittoriaMarcelli, 500);
+      setTimeout(vittoriaMeglioDiDue, 500);
     }; break;
-    case "castello": {
+    case "meglioDiTre": {
         if(numeroPartitaCorrente % 2 == 0){
           if(punteggioSquadra1 + punteggioSquadra2 != 120) {
             alert("Punteggio inserito Errato");
@@ -208,7 +241,7 @@ bottoneAggiungi.addEventListener("click", () => {
           }
           setTimeout(vittoriaTresetteBabbo, 500); 
         }
-        setTimeout(vittoriaCastello,500);
+        setTimeout(vittoriaMeglioDiTre,500);
       };break;
       
     };
@@ -247,39 +280,6 @@ function assegnaVittoriaSquadra2() {
 function assegnaVittoriaBriscola() {
   document.getElementById("punteggioTotSquadra1").innerText ="Vittorie: " + vittorieBriscola[0];
   document.getElementById("punteggioTotSquadra2").innerText ="Vittorie: " + vittorieBriscola[1];
-}
-
-class Squadra {
-  constructor(vittorie, giocatori) {
-    this.vittorie = vittorie;
-    this.giocatori = giocatori;
-    this.nome =
-      this.giocatori[0].substr(0, 5) + " - " + this.giocatori[1].substr(0, 5);
-  }
-
-  get nome() {
-    return this._nome;
-  }
-
-  set nome(nome) {
-    this._nome = nome;
-  }
-
-  get giocatori() {
-    return this._giocatori;
-  }
-
-  set giocatori(giocatori) {
-    this._giocatori = giocatori;
-  }
-
-  get vittorie() {
-    return this._vittorie;
-  }
-
-  set vittorie(vittorie) {
-    this._vittorie = vittorie;
-  }
 }
 
 function displayNone(elemento) {
@@ -372,7 +372,7 @@ function vittoriaBurraco(){
   }
 }
 
-function vittoriaMarcelli(){
+function vittoriaMeglioDiDue(){
   if(vittorieSquadre[0] == 2){
     alert("Ha vinto " + Squadra1.nome);
     location.reload();
@@ -382,7 +382,7 @@ function vittoriaMarcelli(){
   }
 }
 
-function vittoriaCastello(){
+function vittoriaMeglioDiTre(){
   if(vittorieSquadre[0] == 3){
     alert("Ha vinto " + Squadra1.nome);
     location.reload();
